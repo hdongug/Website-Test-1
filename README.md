@@ -6,17 +6,17 @@ A modern web application for exchanging items and fostering community discussion
 
 ## Features
 
-- 🔐 Secure user authentication
-- 💱 Item exchange marketplace
-- 💬 Community forum
-- 👤 User profiles
+1. 🔐 Secure user authentication
+2. 💱 Item exchange marketplace
+3. 💬 Community forum
+4. 👤 User profiles
 
 ## 주요 기능
 
-- 🔐 안전한 사용자 인증
-- 💱 물물교환 마켓플레이스
-- 💬 커뮤니티 게시판
-- 👤 사용자 프로필
+1. 🔐 안전한 사용자 인증
+2. 💱 물물교환 마켓플레이스
+3. 💬 커뮤니티 게시판
+4. 👤 사용자 프로필
 
 ## Tech Stack
 
@@ -70,26 +70,14 @@ npm install
 npm run dev
 ```
 
-개발 서버는 `http://localhost:5173` 에서 실행됩니다.
-
 ## Project Structure
 
-```
+```markdown
 src/
 ├── components/     # Reusable UI components
 ├── pages/         # Application pages
 ├── lib/           # Utility functions and configurations
 └── main.tsx       # Application entry point
-```
-
-## 프로젝트 구조
-
-```
-src/
-├── components/     # 재사용 가능한 UI 컴포넌트
-├── pages/         # 애플리케이션 페이지
-├── lib/           # 유틸리티 함수 및 설정
-└── main.tsx       # 애플리케이션 진입점
 ```
 
 ## Contributing
@@ -99,3 +87,7 @@ Feel free to submit issues and pull requests.
 ## 기여하기
 
 이슈와 풀 리퀘스트는 언제나 환영합니다.
+
+## About
+
+아이템 거래소 프로그램 구현
