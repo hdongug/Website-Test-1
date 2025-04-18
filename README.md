@@ -1,93 +1,48 @@
-# Exchange Platform (물물교환 플랫폼)
+# 게임 거래 플랫폼
 
-A modern web application for exchanging items and fostering community discussions.
-
-물건 교환과 커뮤니티 활동을 위한 현대적인 웹 애플리케이션입니다.
-
-## Features
-
-1. 🔐 Secure user authentication
-2. 💱 Item exchange marketplace
-3. 💬 Community forum
-4. 👤 User profiles
+게임 아이템 거래를 위한 웹 플랫폼입니다.
 
 ## 주요 기능
 
-1. 🔐 안전한 사용자 인증
-2. 💱 물물교환 마켓플레이스
-3. 💬 커뮤니티 게시판
-4. 👤 사용자 프로필
+- 사용자 인증 시스템 (회원가입, 로그인, 로그아웃)
+- 프로필 페이지
+- 네비게이션 바
 
-## Tech Stack
+## 최근 업데이트 (2025-04-18)
 
-- **Frontend**: React + TypeScript
-- **Build Tool**: Vite
-- **Styling**: Tailwind CSS
-- **Backend**: Supabase
-- **Authentication**: Supabase Auth
+### 로컬 스토리지 기반 인증 시스템 구현
+
+- 로컬 스토리지를 사용하여 사용자 데이터 관리
+- 회원가입 및 로그인 기능 구현
+- 사용자 프로필 페이지 접근성 개선 (로그인하지 않은 상태에서도 접근 가능)
+- 네비게이션 바 개선 (로그인 상태와 관계없이 항상 프로필 버튼 표시)
+
+### 사용자 경험 개선
+
+- 로그인 상태 변경 감지를 위한 이벤트 시스템 구현
+- 동일한 창에서의 로그인 상태 변경 감지 기능 추가
+- 사용자 친화적인 메시지 표시
 
 ## 기술 스택
 
-- **프론트엔드**: React + TypeScript
-- **빌드 도구**: Vite
-- **스타일링**: Tailwind CSS
-- **백엔드**: Supabase
-- **인증**: Supabase Auth
+- React
+- TypeScript
+- Vite
+- TailwindCSS
 
-## Getting Started
+## 설치 및 실행
 
-1. Clone the repository:
 ```bash
-git clone https://github.com/hdongug/exchange.git
-```
-
-2. Install dependencies:
-```bash
+# 의존성 설치
 npm install
-```
 
-3. Start the development server:
-```bash
+# 개발 서버 실행
 npm run dev
 ```
 
-The application will be available at `http://localhost:5173`
+## 향후 계획
 
-## 시작하기
-
-1. 저장소 복제:
-```bash
-git clone https://github.com/hdongug/exchange.git
-```
-
-2. 의존성 패키지 설치:
-```bash
-npm install
-```
-
-3. 개발 서버 실행:
-```bash
-npm run dev
-```
-
-## Project Structure
-
-```markdown
-src/
-├── components/     # Reusable UI components
-├── pages/         # Application pages
-├── lib/           # Utility functions and configurations
-└── main.tsx       # Application entry point
-```
-
-## Contributing
-
-Feel free to submit issues and pull requests.
-
-## 기여하기
-
-이슈와 풀 리퀘스트는 언제나 환영합니다.
-
-## About
-
-아이템 거래소 프로그램 구현
+- 거래소 기능 구현
+- 게시판 기능 구현
+- 사용자 경험 개선
+- 성능 최적화

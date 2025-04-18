@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -20,6 +19,7 @@ function App() {
             <Route path="/auth" element={<Auth />} />
             <Route path="/profile" element={<Profile />} />
           </Routes>
+          {/* Auth 컴포넌트 제거 - 이제 /auth 경로를 통해서만 접근 가능 */}
         </main>
       </div>
     </Router>

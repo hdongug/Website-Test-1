@@ -1,11 +1,10 @@
-import React from 'react';
+import AuthComponent from '../components/Auth';
 
 const Auth = () => {
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-6">로그인 / 회원가입</h1>
-      <div className="bg-white rounded-lg shadow p-6">
-        <p className="text-gray-600">인증 페이지 준비 중...</p>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+      <div className="w-full max-w-md">
+        <AuthComponent />
       </div>
     </div>
   );
