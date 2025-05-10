@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게임 아이템 거래 플랫폼</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <nav class="bg-white shadow-lg">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center h-16">
+        <a href="index.html" class="flex items-center space-x-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.5 17.5L3 6"/><path d="M13 19l6-1 1-6"/><path d="M16 16l5-5"/><path d="M14 14l-1.5 1.5"/><path d="M7 9l-1.5 1.5"/><path d="M3 19l3.5-3.5"/><path d="M19 3l-3.5 3.5"/><path d="M10 12l-1.5 1.5"/>
+          </svg>
+          <span class="text-xl font-bold text-gray-800">게임 거래소</span>
+        </a>
+        
+        <div class="flex items-center space-x-6">
+          <a href="market.html" class="flex items-center space-x-1 text-gray-600 hover:text-indigo-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.5 17.5L3 6"/><path d="M13 19l6-1 1-6"/><path d="M16 16l5-5"/><path d="M14 14l-1.5 1.5"/><path d="M7 9l-1.5 1.5"/><path d="M3 19l3.5-3.5"/><path d="M19 3l-3.5 3.5"/><path d="M10 12l-1.5 1.5"/>
+            </svg>
+            <span>거래소</span>
+          </a>
+          <a href="forum.html" class="flex items-center space-x-1 text-gray-600 hover:text-indigo-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span>게시판</span>
+          </a>
+          <a href="attendance.html" class="flex items-center space-x-1 text-gray-600 hover:text-indigo-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span>출석체크</span>
+          </a>
+          <a href="inventory.html" class="flex items-center space-x-1 text-gray-600 hover:text-indigo-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            </svg>
+            <span>창고</span>
+          </a>
+          
+          <a href="profile.html" class="flex items-center space-x-1 text-gray-600 hover:text-indigo-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>사용자 정보</span>
+          </a>
+          
+          <div id="authButton">
+            <a href="login.html" class="flex items-center space-x-1 text-gray-600 hover:text-indigo-600 bg-indigo-100 px-3 py-1 rounded-md">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                <polyline points="10 17 15 12 10 7"></polyline>
+                <line x1="15" y1="12" x2="3" y2="12"></line>
+              </svg>
+              <span>로그인</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mx-auto px-4 py-8">
+    <div class="space-y-12">
+      <section class="text-center">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">
+          게임 아이템 거래 플랫폼에 오신 것을 환영합니다
+        </h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          희귀 아이템을 거래하고, 다른 플레이어와 소통하며, 컬렉션을 완성하세요.
+        </p>
+      </section>
+
+      <section class="max-w-5xl mx-auto mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">추천 아이템</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- 빛과 어둠(쌍검) - 노란색 배경 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden border-2 border-yellow-400">
+            <div class="bg-yellow-100 p-2 flex justify-between items-center">
+              <span class="font-bold text-yellow-800">신화</span>
+              <span class="font-semibold">150,000원</span>
+            </div>
+            <div class="p-4">
+              <img src="./PNG/weapon/KakaoTalk_20250510_205732390.jpg" alt="빛과 어둠" class="w-full h-48 object-cover object-center mb-4">
+              <h3 class="text-lg font-bold mb-2">빛과 어둠</h3>
+              <p class="text-sm text-gray-600">빛과 어둠이 조화를 이루는 강력한 쌍수 검. 공격력 +150, 속도 +20</p>
+              <a href="market.html" class="mt-4 block text-center bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700 transition">거래소 바로가기</a>
+            </div>
+          </div>
+
+          <!-- 다르킨의 낫 - 빨간색 배경 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden border-2 border-red-400">
+            <div class="bg-red-100 p-2 flex justify-between items-center">
+              <span class="font-bold text-red-800">전설</span>
+              <span class="font-semibold">125,000원</span>
+            </div>
+            <div class="p-4">
+              <img src="./PNG/weapon/KakaoTalk_20250510_205732390_10.jpg" alt="다르킨의 낫" class="w-full h-48 object-cover object-center mb-4">
+              <h3 class="text-lg font-bold mb-2">다르킨의 낫</h3>
+              <p class="text-sm text-gray-600">어둠의 왕 다르킨이 사용하는 기름진 낫. 공격력 +130, 크리티컴 확률 +15%</p>
+              <a href="market.html" class="mt-4 block text-center bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700 transition">거래소 바로가기</a>
+            </div>
+          </div>
+
+          <!-- 녹서스 떼돌이 도끼 - 파란색 배경 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden border-2 border-gray-400">
+            <div class="bg-gray-100 p-2 flex justify-between items-center">
+              <span class="font-bold text-gray-800">일반</span>
+              <span class="font-semibold">1,000원</span>
+            </div>
+            <div class="p-4">
+              <img src="./PNG/weapon/KakaoTalk_20250510_205732390_05.png" alt="녹서스 떼돌이 도끼" class="w-full h-48 object-cover object-center mb-4">
+              <h3 class="text-lg font-bold mb-2">녹서스 떼돌이 도끼</h3>
+              <p class="text-sm text-gray-600">녹서스 지역 떼돌이들이 사용하는 도끼. 공격력 +25</p>
+              <a href="market.html" class="mt-4 block text-center bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700 transition">거래소 바로가기</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-indigo-600 mx-auto mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.5 17.5L3 6"/><path d="M13 19l6-1 1-6"/><path d="M16 16l5-5"/><path d="M14 14l-1.5 1.5"/><path d="M7 9l-1.5 1.5"/><path d="M3 19l3.5-3.5"/><path d="M19 3l-3.5 3.5"/><path d="M10 12l-1.5 1.5"/>
+          </svg>
+          <h2 class="text-xl font-semibold mb-2">아이템 거래</h2>
+          <p class="text-gray-600">다른 플레이어와 안전하고 신뢰할 수 있는 거래를 시작하세요.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-indigo-600 mx-auto mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          <h2 class="text-xl font-semibold mb-2">안전한 거래</h2>
+          <p class="text-gray-600">모든 사용자를 위한 안전하고 신뢰할 수 있는 거래 시스템을 제공합니다.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-indigo-600 mx-auto mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+          </svg>
+          <h2 class="text-xl font-semibold mb-2">희귀 아이템</h2>
+          <p class="text-gray-600">전설급, 신화급 아이템으로 컬렉션을 완성하세요.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // 로그인 상태 확인
+    document.addEventListener('DOMContentLoaded', function() {
+      const userJson = localStorage.getItem('user');
+      const authButton = document.getElementById('authButton');
+      
+      if (userJson) {
+        const user = JSON.parse(userJson);
+        // 로그인 된 경우 로그아웃 버튼 표시
+        authButton.innerHTML = `
+          <button id="logoutBtn" class="flex items-center space-x-1 text-gray-600 hover:text-indigo-600 bg-gray-100 px-3 py-1 rounded-md">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            <span>로그아웃</span>
+          </button>
+        `;
+        
+        // 로그아웃 기능 추가
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+          localStorage.removeItem('user');
+          alert('로그아웃되었습니다.');
+          window.location.href = 'index.html';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

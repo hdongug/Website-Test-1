@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게임 거래 플랫폼</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <base href="/">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <nav class="bg-white shadow-lg">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center h-16">
+        <a href="index.html" class="flex items-center space-x-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.5 17.5L3 6"/><path d="M13 19l6-1 1-6"/><path d="M16 16l5-5"/><path d="M14 14l-1.5 1.5"/><path d="M7 9l-1.5 1.5"/><path d="M3 19l3.5-3.5"/><path d="M19 3l-3.5 3.5"/><path d="M10 12l-1.5 1.5"/>
+          </svg>
+          <span class="text-xl font-bold text-gray-800">게임 거래소</span>
+        </a>
+        
+        <div class="flex items-center space-x-6">
+          <a href="market.html" class="flex items-center space-x-1 text-indigo-600 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.5 17.5L3 6"/><path d="M13 19l6-1 1-6"/><path d="M16 16l5-5"/><path d="M14 14l-1.5 1.5"/><path d="M7 9l-1.5 1.5"/><path d="M3 19l3.5-3.5"/><path d="M19 3l-3.5 3.5"/><path d="M10 12l-1.5 1.5"/>
+            </svg>
+            <span>거래소</span>
+          </a>
+          <a href="forum.html" class="flex items-center space-x-1 text-gray-600 hover:text-indigo-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span>게시판</span>
+          </a>
+          <a href="attendance.html" class="flex items-center space-x-1 text-gray-600 hover:text-indigo-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span>출석체크</span>
+          </a>
+          <a href="inventory.html" class="flex items-center space-x-1 text-gray-600 hover:text-indigo-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            </svg>
+            <span>창고</span>
+          </a>
+          
+          <a href="profile.html" class="flex items-center space-x-1 text-gray-600 hover:text-indigo-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>사용자 정보</span>
+          </a>
+          
+          <div id="authButton">
+            <a href="login.html" class="flex items-center space-x-1 text-gray-600 hover:text-indigo-600 bg-indigo-100 px-3 py-1 rounded-md">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                <polyline points="10 17 15 12 10 7"></polyline>
+                <line x1="15" y1="12" x2="3" y2="12"></line>
+              </svg>
+              <span>로그인</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mx-auto px-4 py-8">
+    <div class="space-y-8">
+      <!-- 등급표 -->
+      <div class="bg-white p-4 rounded-lg shadow-md mb-6">
+        <h2 class="text-xl font-bold mb-3">아이템 등급 안내</h2>
+        <div class="flex flex-wrap gap-3">
+          <div class="flex items-center">
+            <span class="inline-block w-4 h-4 bg-gray-300 mr-2 rounded"></span>
+            <span>일반</span>
+          </div>
+          <div class="flex items-center">
+            <span class="inline-block w-4 h-4 bg-green-300 mr-2 rounded"></span>
+            <span>레어</span>
+          </div>
+          <div class="flex items-center">
+            <span class="inline-block w-4 h-4 bg-blue-300 mr-2 rounded"></span>
+            <span>희귀</span>
+          </div>
+          <div class="flex items-center">
+            <span class="inline-block w-4 h-4 bg-purple-300 mr-2 rounded"></span>
+            <span>영웅</span>
+          </div>
+          <div class="flex items-center">
+            <span class="inline-block w-4 h-4 bg-red-300 mr-2 rounded"></span>
+            <span>전설</span>
+          </div>
+          <div class="flex items-center">
+            <span class="inline-block w-4 h-4 bg-yellow-300 mr-2 rounded"></span>
+            <span>신화</span>
+          </div>
+        </div>
+      </div>
+    
+      <!-- 필터 / 검색 -->
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0">
+        <h1 class="text-3xl font-bold text-gray-900">아이템 거래소</h1>
+        <div class="flex flex-wrap gap-3">
+          <div class="relative">
+            <input type="text" id="search-input" placeholder="아이템 검색..." class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent w-full md:w-auto">
+            <button id="search-button" class="absolute right-2 top-2 text-gray-400 hover:text-indigo-500">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </div>
+          
+          <div class="flex space-x-2">
+            <select id="category-filter" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+              <option value="all">모든 카테고리</option>
+              <option value="무기">무기</option>
+              <option value="방어구">방어구</option>
+              <option value="물약">물약</option>
+              <option value="기타">기타</option>
+            </select>
+            
+            <select id="subcategory-filter" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+              <option value="all">모든 서브 카테고리</option>
+            </select>
+          </div>
+          
+          <select id="grade-filter" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+            <option value="all">모든 등급</option>
+            <option value="일반">일반</option>
+            <option value="레어">레어</option>
+            <option value="희귀">희귀</option>
+            <option value="영웅">영웅</option>
+            <option value="전설">전설</option>
+            <option value="신화">신화</option>
+          </select>
+          
+          <select id="sort-order" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+            <option value="recent">최신순</option>
+            <option value="price_low">가격 낮은순</option>
+            <option value="price_high">가격 높은순</option>
+            <option value="name_asc">이름순 (가나다)</option>
+            <option value="name_desc">이름순 (다나가)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 아이템 그리드 -->
+      <div id="item-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <!-- 아이템들은 JavaScript로 동적 생성됩니다 -->
+      </div>
+
+      <!-- 페이지네이션 -->
+      <div class="flex justify-center items-center mt-8 space-x-2">
+        <button id="prev-page" class="px-4 py-2 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+          이전
+        </button>
+        <div id="pagination" class="flex items-center space-x-2">
+          <!-- 페이지 번호는 JavaScript로 동적 생성됩니다 -->
+        </div>
+        <button id="next-page" class="px-4 py-2 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+          다음
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 로그인 상태 확인
+      const userJson = localStorage.getItem('user');
+      const authButton = document.getElementById('authButton');
+      
+      if (userJson) {
+        const user = JSON.parse(userJson);
+        // 로그인 된 경우 로그아웃 버튼 표시
+        authButton.innerHTML = `
+          <button id="logoutBtn" class="flex items-center space-x-1 text-gray-600 hover:text-indigo-600 bg-gray-100 px-3 py-1 rounded-md">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            <span>로그아웃</span>
+          </button>
+        `;
+        
+        // 로그아웃 기능 추가
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+          localStorage.removeItem('user');
+          alert('로그아웃되었습니다.');
+          window.location.href = 'index.html';
+        });
+      }
+
+      // 아이템 데이터 정의
+      const items = [
+        {
+          id: 1,
+          name: '빛과 어둠',
+          grade: '신화',
+          type: '무기',
+          price: 150000,
+          image: './PNG/weapon/KakaoTalk_20250510_205732390.jpg',
+          description: '빛과 어둠이 조화를 이루는 강력한 쌍수 검. 공격력 +150, 속도 +20'
+        },
+        {
+          id: 2,
+          name: '엘프의 활',
+          grade: '영웅',
+          type: '무기',
+          price: 75000,
+          image: './PNG/weapon/KakaoTalk_20250510_205732390_11.jpg',
+          description: '엘프들이 사용하는 전통 활. 정확도 +30, 사정거리 +25%'
+        },
+        {
+          id: 3,
+          name: '다르킨의 낫',
+          grade: '전설',
+          type: '무기',
+          price: 125000,
+          image: './PNG/weapon/KakaoTalk_20250510_205732390_10.jpg',
+          description: '어둠의 왕 다르킨이 사용하는 기름진 낫. 공격력 +130, 크리티컬 확률 +15%'
+        },
+        {
+          id: 4,
+          name: '암흑군주의 활',
+          grade: '신화',
+          type: '무기',
+          price: 150000,
+          image: './PNG/weapon/KakaoTalk_20250510_205732390_09.jpg',
+          description: '암흑군주가 가진 마법의 힘이 담겨있는 활. 공격력 +140, 마법 공격력 +30%'
+        },
+        {
+          id: 5,
+          name: '다르킨의 검',
+          grade: '전설',
+          type: '무기',
+          price: 125000,
+          image: './PNG/weapon/KakaoTalk_20250510_205732390_08.jpg',
+          description: '다르킨의 조각이 담겨있는 일편도. 속도 +25, 공격력 +110'
+        },
+        {
+          id: 6,
+          name: '일본도',
+          grade: '레어',
+          type: '무기',
+          price: 5000,
+          image: './PNG/weapon/KakaoTalk_20250510_205732390_07.jpg',
+          description: '일본 스타일의 검. 공격력 +45, 방어력 무시 10%'
+        },
+        {
+          id: 7,
+          name: '산적 두목의 검',
+          grade: '희귀',
+          type: '무기',
+          price: 10000,
+          image: './PNG/weapon/KakaoTalk_20250510_205732390_06.png',
+          description: '산적 두목이 사용하던 강력한 검. 공격력 +60, 멸투 +10%'
+        },
+        {
+          id: 8,
+          name: '녹서스의 떠돌이 도끼',
+          grade: '일반',
+          type: '무기',
+          price: 1000,
+          image: './PNG/weapon/KakaoTalk_20250510_205732390_05.png',
+          description: '녹서스 지역 떠돌이들이 사용하는 도끼. 공격력 +25'
+        },
+        {
+          id: 9,
+          name: '신의 활',
+          grade: '신호',
+          type: '무기',
+          price: 150000,
+          image: './PNG/weapon/KakaoTalk_20250510_205732390_04.jpg',
+          description: '신의 영혼이 담겨있는 활. 공격력 +155, 추가 데미지 +15%'
+        },
+        {
+          id: 10,
+          name: '칠흑의 양날도끼',
+          grade: '전설',
+          type: '무기',
+          price: 125000,
+          image: './PNG/weapon/KakaoTalk_20250510_205732390_03.jpg',
+          description: '마법의 칠흑 광물로 만들어진 양날 도끼. 공격력 +135, 방어력 무시 20%'
+        },
+        {
+          id: 11,
+          name: '빙결 활',
+          grade: '영웅',
+          type: '무기',
+          price: 75000,
+          image: './PNG/weapon/KakaoTalk_20250510_205732390_02.jpg',
+          description: '빙색 마법의 힘이 담긴 활. 공격력 +95, 빙결 데미지 20% 추가'
+        },
+        {
+          id: 12,
+          name: '떼돌이 지팡이',
+          grade: '일반',
+          type: '무기',
+          price: 1000,
+          image: './PNG/weapon/KakaoTalk_20250510_205732390_01.jpg',
+          description: '떼돌이 마법사들이 사용하는 기본 지팡이. 마법 공격력 +30'
+        }
+      ];
+
+      // 페이지네이션 설정
+      const itemsPerPage = 8; // 페이지당 8개 아이템으로 변경
+      let currentPage = 1;
+      let filteredItems = [...items]; // 필터링된 아이템 목록 초기화
+      let totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+      
+      // 등급에 따른 색상 설정
+      const gradeColors = {
+        '일반': { bg: 'bg-gray-100', text: 'text-gray-800' },
+        '레어': { bg: 'bg-green-100', text: 'text-green-800' },
+        '희귀': { bg: 'bg-blue-100', text: 'text-blue-800' },
+        '영웅': { bg: 'bg-purple-100', text: 'text-purple-800' },
+        '전설': { bg: 'bg-red-100', text: 'text-red-800' },
+        '신화': { bg: 'bg-yellow-100', text: 'text-yellow-800' },
+        '신호': { bg: 'bg-yellow-100', text: 'text-yellow-800' }
+      };
+
+      // 페이지에 해당하는 아이템 가져오기
+      function getItemsForPage(page) {
+        const startIndex = (page - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        return filteredItems.slice(startIndex, endIndex);
+      }
+      
+      // 필터링 함수 - 카테고리, 서브카테고리, 등급에 따라 아이템 필터링
+      function filterItems() {
+        const searchQuery = document.getElementById('search-input').value.toLowerCase();
+        const categoryFilter = document.getElementById('category-filter').value;
+        const subcategoryFilter = document.getElementById('subcategory-filter').value;
+        const gradeFilter = document.getElementById('grade-filter').value;
+        
+        filteredItems = items.filter(item => {
+          // 검색어 필터링
+          const matchesSearch = item.name.toLowerCase().includes(searchQuery) || 
+                             item.description.toLowerCase().includes(searchQuery);
+          
+          // 카테고리 필터링
+          const matchesCategory = categoryFilter === 'all' || item.type === categoryFilter;
+          
+          // 서브카테고리 필터링 - 아이템 이름에서 괄호 안의 내용으로 확인
+          const subcategoryMatch = item.name.match(/\((.*?)\)/);
+          const itemSubcategory = subcategoryMatch ? subcategoryMatch[1] : '';
+          const matchesSubcategory = subcategoryFilter === 'all' || itemSubcategory === subcategoryFilter;
+          
+          // 등급 필터링
+          const matchesGrade = gradeFilter === 'all' || item.grade === gradeFilter;
+          
+          return matchesSearch && matchesCategory && matchesSubcategory && matchesGrade;
+        });
+        
+        // 필터링 후 페이지 정보 업데이트
+        totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+        currentPage = 1; // 첫 페이지로 이동
+        
+        renderItems(currentPage);
+        renderPagination();
+        updateNavigationButtons();
+      }
+
+      // 각 카테고리에 대한 서브카테고리 정의
+      const subcategories = {
+        '무기': ['쌍검', '활', '낫', '단검', '양손검', '한손검', '도끼', '지팡이'],
+        '방어구': ['투구', '갑옷', '모자', '장갑', '전신 방어구', '부적'],
+        '물약': ['회복 물약', '마나 물약', '경험치 물약', '증폭 물약', '공격력 물약'],
+        '기타': ['영웅의 글자', '이동 주문서', '캐릭터 확장 슬롯']
+      };
+
+      // 서브카테고리 설정 함수
+      function updateSubcategories() {
+        const categorySelect = document.getElementById('category-filter');
+        const subcategorySelect = document.getElementById('subcategory-filter');
+        const selectedCategory = categorySelect.value;
+        
+        // 서브카테고리 선택 초기화
+        subcategorySelect.innerHTML = '';
+        
+        // 기본 '모든 서브카테고리' 옵션 추가
+        const defaultOption = document.createElement('option');
+        defaultOption.value = 'all';
+        defaultOption.textContent = '모든 서브 카테고리';
+        subcategorySelect.appendChild(defaultOption);
+        
+        // 선택한 카테고리가 '모든 카테고리'가 아니고, 해당 카테고리에 대한 서브카테고리가 있는 경우 옵션 추가
+        if (selectedCategory !== 'all' && subcategories[selectedCategory]) {
+          subcategories[selectedCategory].forEach(subcategory => {
+            const option = document.createElement('option');
+            option.value = subcategory;
+            option.textContent = subcategory;
+            subcategorySelect.appendChild(option);
+          });
+        }
+        
+        // 필터링 적용
+        filterItems();
+      }
+
+      // 필터링 이벤트 리스너 설정
+      document.getElementById('search-button').addEventListener('click', filterItems);
+      document.getElementById('search-input').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+          filterItems();
+        }
+      });
+      
+      // 카테고리 변경 시 서브카테고리 업데이트 및 필터링
+      document.getElementById('category-filter').addEventListener('change', updateSubcategories);
+      document.getElementById('subcategory-filter').addEventListener('change', filterItems);
+      document.getElementById('grade-filter').addEventListener('change', filterItems);
+      document.getElementById('sort-order').addEventListener('change', function() {
+        const sortOrder = this.value;
+        
+        // 정렬 방식에 따라 아이템 정렬
+        switch(sortOrder) {
+          case 'recent':
+            // 기본 순서 (ID 기준)
+            filteredItems.sort((a, b) => a.id - b.id);
+            break;
+          case 'price_low':
+            filteredItems.sort((a, b) => a.price - b.price);
+            break;
+          case 'price_high':
+            filteredItems.sort((a, b) => b.price - a.price);
+            break;
+          case 'name_asc':
+            filteredItems.sort((a, b) => a.name.localeCompare(b.name, 'ko'));
+            break;
+          case 'name_desc':
+            filteredItems.sort((a, b) => b.name.localeCompare(a.name, 'ko'));
+            break;
+        }
+        
+        currentPage = 1; // 첫 페이지로 초기화
+        renderItems(currentPage);
+        renderPagination();
+        updateNavigationButtons();
+      });
+      
+      // 아이템 표시 함수
+      function renderItems(page) {
+        const itemGrid = document.getElementById('item-grid');
+        itemGrid.innerHTML = '';
+        
+        const itemsToShow = getItemsForPage(page);
+        
+        itemsToShow.forEach(item => {
+          const { bg, text } = gradeColors[item.grade] || { bg: 'bg-gray-100', text: 'text-gray-800' };
+          const formattedPrice = new Intl.NumberFormat('ko-KR').format(item.price);
+          
+          const itemElement = document.createElement('div');
+          itemElement.className = 'bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300';
+          itemElement.innerHTML = `
+            <div class="relative pt-[100%] overflow-hidden">
+              <img src="${item.image}" alt="${item.name}" class="absolute top-0 left-0 w-full h-full object-contain p-2" onerror="this.onerror=null; console.log('이미지 로드 오류:' + this.src); this.src='https://via.placeholder.com/150x150?text=이미지+없음';">
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-semibold text-gray-800 mb-2">${item.name}</h3>
+              <div class="flex items-center space-x-1 mb-1">
+                <span class="${bg} ${text} text-xs px-2 py-1 rounded">${item.grade}</span>
+                <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">${item.type}</span>
+              </div>
+              <p class="text-sm text-gray-600 mb-2">${item.description}</p>
+              <div class="flex justify-between items-center mt-3">
+                <span class="text-lg font-bold text-indigo-600">${formattedPrice} 골드</span>
+                <button class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200 transition-colors duration-200 buy-item" data-id="${item.id}">
+                  구매하기
+                </button>
+              </div>
+            </div>
+          `;
+          
+          itemGrid.appendChild(itemElement);
+        });
+        
+        // 아이템 구매 버튼 이벤트 처리
+        document.querySelectorAll('.buy-item').forEach(button => {
+          button.addEventListener('click', function() {
+            const itemId = parseInt(this.getAttribute('data-id'));
+            const item = items.find(i => i.id === itemId);
+            
+            if (!userJson) {
+              alert('아이템을 구매하려면 로그인해야 합니다.');
+              return;
+            }
+            
+            const user = JSON.parse(userJson);
+            if (user.balance < item.price) {
+              alert('잔액이 부족합니다.');
+              return;
+            }
+            
+            if (confirm(`${item.name}을(를) ${item.price} 골드에 구매하시겠습니까?`)) {
+              user.balance -= item.price;
+              localStorage.setItem('user', JSON.stringify(user));
+              
+              // 구매한 아이템 처리 (표시용 데뉒)
+              let inventory = JSON.parse(localStorage.getItem('inventory')) || {};
+              if (!inventory[user.username]) {
+                inventory[user.username] = [];
+              }
+              
+              inventory[user.username].push({
+                ...item,
+                purchaseDate: new Date().toISOString()
+              });
+              
+              localStorage.setItem('inventory', JSON.stringify(inventory));
+              alert(`${item.name}을(를) 성공적으로 구매했습니다.`);
+            }
+          });
+        });
+      }
+
+      // 페이지네이션 버튼 표시 함수
+      function renderPagination() {
+        const paginationElement = document.getElementById('pagination');
+        paginationElement.innerHTML = '';
+        
+        for (let i = 1; i <= totalPages; i++) {
+          const pageButton = document.createElement('button');
+          pageButton.textContent = i;
+          pageButton.className = i === currentPage
+            ? 'px-3 py-1 bg-indigo-600 text-white rounded'
+            : 'px-3 py-1 text-gray-700 hover:bg-indigo-100 rounded';
+          
+          pageButton.addEventListener('click', function() {
+            currentPage = i;
+            renderItems(currentPage);
+            renderPagination();
+            updateNavigationButtons();
+          });
+          
+          paginationElement.appendChild(pageButton);
+        }
+      }
+
+      // 이전/다음 버튼 업데이트 함수
+      function updateNavigationButtons() {
+        const prevButton = document.getElementById('prev-page');
+        const nextButton = document.getElementById('next-page');
+        
+        prevButton.disabled = currentPage === 1;
+        nextButton.disabled = currentPage === totalPages;
+      }
+
+      // 이전 버튼 클릭 이벤트
+      document.getElementById('prev-page').addEventListener('click', function() {
+        if (currentPage > 1) {
+          currentPage--;
+          renderItems(currentPage);
+          renderPagination();
+          updateNavigationButtons();
+        }
+      });
+
+      // 다음 버튼 클릭 이벤트
+      document.getElementById('next-page').addEventListener('click', function() {
+        if (currentPage < totalPages) {
+          currentPage++;
+          renderItems(currentPage);
+          renderPagination();
+          updateNavigationButtons();
+        }
+      });
+
+      // 초기화: 서브카테고리 설정 및 아이템/페이지네이션 표시
+      updateSubcategories(); // 서브카테고리 초기화
+      renderItems(currentPage);
+      renderPagination();
+      updateNavigationButtons();
+    });
+  </script>
+</body>
+</html>
