@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게임 아이템 거래 플랫폼 - 게시판</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <nav class="bg-white shadow-lg">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center h-16">
+        <a href="index.html" class="flex items-center space-x-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.5 17.5L3 6"/><path d="M13 19l6-1 1-6"/><path d="M16 16l5-5"/><path d="M14 14l-1.5 1.5"/><path d="M7 9l-1.5 1.5"/><path d="M3 19l3.5-3.5"/><path d="M19 3l-3.5 3.5"/><path d="M10 12l-1.5 1.5"/>
+          </svg>
+          <span class="text-xl font-bold text-gray-800">게임 거래소</span>
+        </a>
+        
+        <div class="flex items-center space-x-6">
+          <a href="market.html" class="flex items-center space-x-1 text-gray-600 hover:text-indigo-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.5 17.5L3 6"/><path d="M13 19l6-1 1-6"/><path d="M16 16l5-5"/><path d="M14 14l-1.5 1.5"/><path d="M7 9l-1.5 1.5"/><path d="M3 19l3.5-3.5"/><path d="M19 3l-3.5 3.5"/><path d="M10 12l-1.5 1.5"/>
+            </svg>
+            <span>거래소</span>
+          </a>
+          <a href="forum.html" class="flex items-center space-x-1 text-indigo-600 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span>게시판</span>
+          </a>
+          <a href="attendance.html" class="flex items-center space-x-1 text-gray-600 hover:text-indigo-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span>출석체크</span>
+          </a>
+          <a href="inventory.html" class="flex items-center space-x-1 text-gray-600 hover:text-indigo-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            </svg>
+            <span>창고</span>
+          </a>
+          
+          <a href="profile.html" class="flex items-center space-x-1 text-gray-600 hover:text-indigo-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>사용자 정보</span>
+          </a>
+          
+          <div id="authButton">
+            <a href="login.html" class="flex items-center space-x-1 text-gray-600 hover:text-indigo-600 bg-indigo-100 px-3 py-1 rounded-md">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                <polyline points="10 17 15 12 10 7"></polyline>
+                <line x1="15" y1="12" x2="3" y2="12"></line>
+              </svg>
+              <span>로그인</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mx-auto px-4 py-8">
+    <div class="space-y-8">
+      <div class="flex justify-between items-center">
+        <h1 class="text-3xl font-bold text-gray-900">게시판</h1>
+        <div class="flex space-x-4">
+          <div class="relative">
+            <input type="text" placeholder="검색..." class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+            <button class="absolute right-2 top-2 text-gray-400 hover:text-indigo-500">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </div>
+          <select class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+            <option value="all">전체 게시글</option>
+            <option value="notice">공지사항</option>
+            <option value="free">자유게시판</option>
+            <option value="trade">거래 게시판</option>
+            <option value="guide">가이드</option>
+          </select>
+          <button class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+            글쓰기
+          </button>
+        </div>
+      </div>
+
+      <!-- 카테고리 탭 -->
+      <div class="border-b border-gray-200">
+        <nav class="-mb-px flex space-x-8">
+          <a href="#" class="border-indigo-500 text-indigo-600 whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm">
+            전체 게시글
+          </a>
+          <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm">
+            공지사항
+          </a>
+          <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm">
+            자유게시판
+          </a>
+          <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm">
+            거래 게시판
+          </a>
+          <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm">
+            가이드
+          </a>
+        </nav>
+      </div>
+
+      <!-- 게시글 목록 -->
+      <div class="bg-white shadow overflow-hidden sm:rounded-md">
+        <ul class="divide-y divide-gray-200">
+          <!-- 공지사항 -->
+          <li class="bg-indigo-50">
+            <a href="#" class="block hover:bg-gray-50">
+              <div class="px-4 py-4 sm:px-6">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center">
+                    <span class="flex-shrink-0 inline-block px-2 py-0.5 text-xs font-medium bg-indigo-100 text-indigo-800 rounded">공지</span>
+                    <p class="ml-2 text-sm font-medium text-gray-900">사이트 정기 점검안내 (5월 15일)</p>
+                  </div>
+                  <div class="ml-2 flex-shrink-0 flex">
+                    <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                      고정
+                    </p>
+                  </div>
+                </div>
+                <div class="flex justify-between mt-2">
+                  <div class="sm:flex">
+                    <p class="flex items-center text-sm text-gray-500">
+                      관리자
+                    </p>
+                  </div>
+                  <div class="flex items-center text-sm text-gray-500">
+                    <p>2025-05-10</p>
+                    <p class="ml-2">조회 254</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+
+          <!-- 일반 게시글 1 -->
+          <li>
+            <a href="#" class="block hover:bg-gray-50">
+              <div class="px-4 py-4 sm:px-6">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center">
+                    <span class="flex-shrink-0 inline-block px-2 py-0.5 text-xs font-medium bg-blue-100 text-blue-800 rounded">자유</span>
+                    <p class="ml-2 text-sm font-medium text-gray-900">안녕하세요, 신규 유저입니다 반갑습니다!</p>
+                  </div>
+                </div>
+                <div class="flex justify-between mt-2">
+                  <div class="sm:flex">
+                    <p class="flex items-center text-sm text-gray-500">
+                      게이머
+                    </p>
+                  </div>
+                  <div class="flex items-center text-sm text-gray-500">
+                    <p>2025-05-09</p>
+                    <p class="ml-2">조회 42</p>
+                    <p class="ml-2">댓글 5</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+
+          <!-- 일반 게시글 2 -->
+          <li>
+            <a href="#" class="block hover:bg-gray-50">
+              <div class="px-4 py-4 sm:px-6">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center">
+                    <span class="flex-shrink-0 inline-block px-2 py-0.5 text-xs font-medium bg-yellow-100 text-yellow-800 rounded">거래</span>
+                    <p class="ml-2 text-sm font-medium text-gray-900">전설의 검 판매합니다 (125,000골드)</p>
+                  </div>
+                </div>
+                <div class="flex justify-between mt-2">
+                  <div class="sm:flex">
+                    <p class="flex items-center text-sm text-gray-500">
+                      판매자
+                    </p>
+                  </div>
+                  <div class="flex items-center text-sm text-gray-500">
+                    <p>2025-05-08</p>
+                    <p class="ml-2">조회 128</p>
+                    <p class="ml-2">댓글 12</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+
+          <!-- 일반 게시글 3 -->
+          <li>
+            <a href="#" class="block hover:bg-gray-50">
+              <div class="px-4 py-4 sm:px-6">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center">
+                    <span class="flex-shrink-0 inline-block px-2 py-0.5 text-xs font-medium bg-green-100 text-green-800 rounded">가이드</span>
+                    <p class="ml-2 text-sm font-medium text-gray-900">초보자를 위한 아이템 거래 가이드</p>
+                  </div>
+                </div>
+                <div class="flex justify-between mt-2">
+                  <div class="sm:flex">
+                    <p class="flex items-center text-sm text-gray-500">
+                      구매자
+                    </p>
+                  </div>
+                  <div class="flex items-center text-sm text-gray-500">
+                    <p>2025-05-07</p>
+                    <p class="ml-2">조회 315</p>
+                    <p class="ml-2">댓글 24</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+
+          <!-- 일반 게시글 4 -->
+          <li>
+            <a href="#" class="block hover:bg-gray-50">
+              <div class="px-4 py-4 sm:px-6">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center">
+                    <span class="flex-shrink-0 inline-block px-2 py-0.5 text-xs font-medium bg-blue-100 text-blue-800 rounded">자유</span>
+                    <p class="ml-2 text-sm font-medium text-gray-900">신고 아이템 투표 대회에 참여해주세요~</p>
+                  </div>
+                </div>
+                <div class="flex justify-between mt-2">
+                  <div class="sm:flex">
+                    <p class="flex items-center text-sm text-gray-500">
+                      영웅왕
+                    </p>
+                  </div>
+                  <div class="flex items-center text-sm text-gray-500">
+                    <p>2025-05-06</p>
+                    <p class="ml-2">조회 98</p>
+                    <p class="ml-2">댓글 7</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 페이지네이션 -->
+      <div class="flex justify-center mt-8">
+        <nav class="flex items-center space-x-2">
+          <a href="#" class="px-3 py-1 bg-indigo-600 text-white rounded">
+            1
+          </a>
+          <a href="#" class="px-3 py-1 text-gray-700 hover:bg-indigo-100 rounded">
+            2
+          </a>
+          <a href="#" class="px-3 py-1 text-gray-700 hover:bg-indigo-100 rounded">
+            3
+          </a>
+          <span class="px-3 py-1 text-gray-400">
+            ...
+          </span>
+          <a href="#" class="px-3 py-1 text-gray-700 hover:bg-indigo-100 rounded">
+            10
+          </a>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 로그인 상태 확인
+      const userJson = localStorage.getItem('user');
+      const authButton = document.getElementById('authButton');
+      
+      if (userJson) {
+        const user = JSON.parse(userJson);
+        // 로그인 된 경우 로그아웃 버튼 표시
+        authButton.innerHTML = `
+          <button id="logoutBtn" class="flex items-center space-x-1 text-gray-600 hover:text-indigo-600 bg-gray-100 px-3 py-1 rounded-md">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            <span>로그아웃</span>
+          </button>
+        `;
+        
+        // 로그아웃 기능 추가
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+          localStorage.removeItem('user');
+          alert('로그아웃되었습니다.');
+          window.location.href = 'index.html';
+        });
+      }
+    });
+  </script>
+</body>
+</html>
