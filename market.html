@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>거래소 - 게임 거래소</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- 공통 아이템 데이터 로드 (캐싱 방지) -->
+  <script src="/js/itemsData.js?v=1.6"></script>
+  
+  <!-- 기본 아이템 데이터 정의 (데이터 로드 오류 대비) -->
+  <script>
+    // 이 코드는 itemsData.js가 로드되지 않을 경우를 대비한 비상 시각용 코드입니다
+    if (typeof allItems === 'undefined' || !allItems) {
+      console.log('아이템 데이터 정의 아직 안됨, 기본 데이터 사용');
+      
+      // 기본 아이템 데이터 정의
+      window.allItems = [
+        {
+          id: '1',
+          name: '마법 스태프',
+          price: 1000,
+          description: '마법 협회에서 마법사들의 마력을 보조를 해주기 위한 기본 아이템이다.',
+          stats: '마력 +10 마나 회복: 5%',
+          rarity: 'common',
+          category: 'weapon',
+          subcategory: 'staff',
+          imageUrl: '/PNG/weapons/staff_01.png'
+        },
+        {
+          id: '2',
+          name: '제국 도끼',
+          price: 1200,
+          description: '제국의 해처로 불리는 지역에서 나온 특색있는 도끼이다.',
+          stats: '공격력 +15',
+          effect: '집중력 +3%',
+          rarity: 'uncommon',
+          category: 'weapon',
+          subcategory: 'axe',
+          imageUrl: '/PNG/weapons/axe_02.png'
+        },
+        {
+          id: '3',
+          name: '제국의 활',
+          price: 1500,
+          description: '제국의 덴 군사들이 사용하는 우수한 활이다.',
+          stats: '공격력 +10',
+          effect: '수성 적중 +10%',
+          rarity: 'uncommon',
+          category: 'weapon',
+          subcategory: 'bow',
+          imageUrl: '/PNG/weapons/bow_02.png'
+        },
+        {
+          id: '4',
+          name: '칠흑의 양날 도끼',
+          price: 2500,
+          description: '어둠이 까말라거 같이 무거운 양날 도끼이다. 작은 언덕을 질 수 있다.',
+          stats: '공격력 +20 방어력 +5',
+          effect: '치명타 +5%',
+          rarity: 'rare',
+          category: 'weapon',
+          subcategory: 'axe',
+          imageUrl: '/PNG/weapons/axe_03.png'
+        }
+      ];
+    } else {
+      console.log('아이템 데이터 정상 로드됨, 아이템 개수: ' + allItems.length);
+    }
+  </script>
+</head>
+<body class="bg-gray-100">
+  <!-- 헤더 -->
+  <header class="bg-purple-600 text-white">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center py-3">
+        <a href="/" class="text-xl font-bold">게임 거래소</a>
+        
+        <!-- 네비게이션 -->
+        <nav class="relative">
+          <div class="flex items-center space-x-4">
+            <a href="/" class="hover:text-purple-200">홈페이지</a>
+            <a href="/market.html" class="hover:text-purple-200 border-b-2 border-white">거래소</a>
+            <a href="/attendance.html" class="hover:text-purple-200">출석체크</a>
+            
+            <!-- 메뉴 드롭다운 -->
+            <div class="relative">
+              <button id="menuBtn" class="text-white hover:text-gray-200">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+              </button>
+              <div class="dropdown-menu absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 hidden">
+                <div class="border-b border-gray-200 py-1">
+                  <a href="/profile.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">내 정보</a>
+                  <a href="/inventory.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">인벤토리</a>
+                </div>
+                <div class="border-b border-gray-200 py-1">
+                  <a href="/board.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">게시판</a>
+                </div>
+                <div class="pt-1">
+                  <a href="#" id="logoutBtn" class="logged-in block px-4 py-2 text-gray-800 hover:bg-purple-100">로그아웃</a>
+                  <a href="/login.html" id="loginBtn" class="logged-out block px-4 py-2 text-gray-800 hover:bg-purple-100">로그인</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="container mx-auto px-4 py-8">
+    <!-- 검색 및 필터 섹션 -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <!-- 검색 바 -->
+        <div class="flex items-center flex-1">
+          <input type="text" id="searchInput" placeholder="아이템 이름 검색..." class="border-gray-300 border rounded-l-md py-2 px-4 flex-1 focus:outline-none focus:ring-2 focus:ring-purple-500">
+          <button id="searchBtn" class="bg-purple-600 text-white py-2 px-4 rounded-r-md hover:bg-purple-700 focus:outline-none">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </button>
+        </div>
+        
+        <!-- 필터 버튼들 -->
+        <div class="flex flex-wrap gap-2">
+          <select id="categoryFilter" class="border-gray-300 border rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-purple-500">
+            <option value="all">모든 카테고리</option>
+            <option value="weapon">무기</option>
+            <option value="armor">방어구</option>
+            <option value="accessory">장신구</option>
+            <option value="potion">물약</option>
+          </select>
+          
+          <select id="subCategoryFilter" class="border-gray-300 border rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-purple-500">
+            <option value="all">모든 서브 카테고리</option>
+          </select>
+          
+          <select id="gradeFilter" class="border-gray-300 border rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-purple-500">
+            <option value="all">모든 등급</option>
+            <option value="common">일반</option>
+            <option value="uncommon">레어</option>
+            <option value="rare">희귀</option>
+            <option value="epic">에픽</option>
+            <option value="legendary">전설</option>
+            <option value="mythic">신화</option>
+          </select>
+          
+          <select id="priceFilter" class="border-gray-300 border rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-purple-500">
+            <option value="all">가격 순</option>
+            <option value="asc">오름차순</option>
+            <option value="desc">내림차순</option>
+          </select>
+          
+          <button id="resetFilter" class="bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-300 focus:outline-none flex items-center">
+            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+            </svg>
+            필터 초기화
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 전체 아이템 섹션 -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+      <h2 class="text-xl font-bold mb-4">전체 아이템</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="itemContainer">
+        <!-- 아이템 리스트가 JavaScript로 생성됨 -->
+      </div>
+      
+      <!-- 페이지네이션 -->
+      <div id="pagination" class="mt-6 flex justify-center">
+        <!-- 페이지 번호가 JavaScript로 생성됨 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 아이템 템플릿 - 화면에 표시되지 않지만 JavaScript에서 사용됨 -->
+  <template id="itemTemplate">
+    <div class="bg-white rounded-lg shadow-md overflow-hidden item-card" data-category="" data-subcategory="">
+      <div class="p-2 flex justify-between items-center" data-grade-bg="">
+        <span class="font-bold text-white" data-grade=""></span>
+      </div>
+      <div class="p-4">
+        <div class="flex flex-col items-center">
+          <div class="bg-gray-100 w-full h-40 mb-3 flex items-center justify-center overflow-hidden">
+            <img src="" alt="제품" class="w-full h-full object-contain" data-img="">
+          </div>
+          <h3 class="text-lg font-bold mb-1" data-name=""></h3>
+          <div class="mt-1 mb-3">
+            <div class="grade-price-container flex items-center justify-between mb-1">
+              <span class="px-2 py-1 rounded-full text-xs font-bold grade-badge" data-grade=""></span>
+              <p class="text-sm font-semibold text-yellow-500" data-price="" data-price-color=""></p>
+            </div>
+          </div>
+          <div class="flex space-x-2 w-full">
+            <button class="flex-1 bg-green-600 text-white py-2 rounded-md hover:bg-green-700">구매</button>
+            <button class="flex-1 bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700">상세정보</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- 아이템 상세정보 모달 -->
+  <div id="itemDetailModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg p-6 max-w-md w-full">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-bold" id="modalItemName">아이템 이름</h3>
+        <button id="closeModalButton" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div id="modalContent" class="mt-2">
+        <!-- 모달 내용은 JavaScript로 채워집니다 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 토스트 메시지 -->
+  <div id="toast-message" class="fixed bottom-4 right-4 bg-gray-800 text-white px-4 py-2 rounded-md shadow-lg transform transition-opacity duration-300 opacity-0 pointer-events-none"></div>
+  
+  <!-- 수정된 시장 스크립트 로드 -->
+  <script src="/js/market-fix.js?v=1.3"></script>
+  
+  <!-- 아이템 렌더링 직접 코드 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('아이템 렌더링 직접 코드 실행!');
+      
+      // allItems 가 정의되었는지 확인
+      if (!window.allItems || !Array.isArray(window.allItems) || window.allItems.length === 0) {
+        console.error('allItems 데이터가 없습니다. 기본 아이템 데이터 생성');
+        
+        // 기본 아이템 데이터 정의 (여기서 한 번 더 정의)
+        window.allItems = [
+          {
+            id: '1',
+            name: '마법 스태프',
+            price: 1000,
+            description: '마법 협회에서 마법사들의 마력을 보조를 해주기 위한 기본 아이템이다.',
+            stats: '마력 +10 마나 회복: 5%',
+            rarity: 'common',
+            category: 'weapon',
+            subcategory: 'staff',
+            imageUrl: '/PNG/weapon/KakaoTalk_20250510_205732390_01.jpg'
+          },
+          {
+            id: '2',
+            name: '제국 도끼',
+            price: 1200,
+            description: '제국의 해처로 불리는 지역에서 나온 특색있는 도끼이다.',
+            stats: '공격력 +15',
+            effect: '집중력 +3%',
+            rarity: 'uncommon',
+            category: 'weapon',
+            subcategory: 'axe',
+            imageUrl: '/PNG/weapon/KakaoTalk_20250510_205732390_02.jpg'
+          },
+          {
+            id: '3',
+            name: '제국의 활',
+            price: 1500,
+            description: '제국의 덴 군사들이 사용하는 우수한 활이다.',
+            stats: '공격력 +10',
+            effect: '수성 적중 +10%',
+            rarity: 'uncommon',
+            category: 'weapon',
+            subcategory: 'bow',
+            imageUrl: '/PNG/weapon/KakaoTalk_20250510_205732390_03.jpg'
+          },
+          {
+            id: '4',
+            name: '심연의 칼',
+            price: 5000,
+            description: '영우들이 사용하는 전설의 칼',
+            stats: '공격력 +50 체력 +50',
+            effect: '공격속도 50% 증가, 치명타 +20%',
+            rarity: 'legendary',
+            category: 'weapon',
+            subcategory: 'sword',
+            imageUrl: '/PNG/weapon/KakaoTalk_20250510_205732390_06.png'
+          },
+          {
+            id: '10',
+            name: '갑옷',
+            price: 1000,
+            description: '어느 제국의 갑옷이다.',
+            stats: '방어력 +15',
+            effect: '체력 +50',
+            rarity: 'common',
+            category: 'armor',
+            subcategory: 'body',
+            imageUrl: '/PNG/armor/KakaoTalk_20250510_205732390_01.jpg'
+          }
+        ];
+      }
+      
+      // 등급 표시 색상 맵핑
+      const rarityColorMap = {
+        'mythic': { bg: 'bg-gradient-to-r from-purple-500 to-purple-800', text: 'text-purple-600' },
+        'legendary': { bg: 'bg-gradient-to-r from-yellow-500 to-yellow-800', text: 'text-yellow-600' },
+        'epic': { bg: 'bg-gradient-to-r from-pink-500 to-pink-800', text: 'text-pink-600' },
+        'rare': { bg: 'bg-gradient-to-r from-blue-500 to-blue-800', text: 'text-blue-600' },
+        'uncommon': { bg: 'bg-gradient-to-r from-green-500 to-green-800', text: 'text-green-600' },
+        'common': { bg: 'bg-gradient-to-r from-gray-500 to-gray-800', text: 'text-gray-600' }
+      };
+      
+      // 등급 한글 이름 맵핑
+      const rarityNameMap = {
+        'mythic': '신화',
+        'legendary': '전설',
+        'epic': '에픽',
+        'rare': '희귀',
+        'uncommon': '레어',
+        'common': '일반'
+      };
+      
+      // 직접 아이템 렌더링 시도
+      setTimeout(function() {
+        // 아이템 컨테이너 확인
+        const itemContainer = document.getElementById('itemContainer');
+        
+        if (!itemContainer) {
+          console.error('아이템 컨테이너를 찾을 수 없습니다.');
+          return;
+        }
+        
+        // 아이템이 렌더링되지 않은 경우 직접 렌더링 시도
+        if (itemContainer.childElementCount === 0 && window.allItems && Array.isArray(window.allItems)) {
+          console.log('직접 아이템 렌더링 시도, 아이템 개수:', allItems.length);
+
+          // 아이템 템플릿 가져오기
+          const template = document.getElementById('itemTemplate');
+          if (!template) {
+            console.error('아이템 템플릿를 찾을 수 없습니다.');
+            return;
+          }
+          
+          // 모든 아이템 렌더링
+          allItems.slice(0, 8).forEach(item => {
+            // 템플릿 복사
+            const clone = template.content.cloneNode(true);
+            const card = clone.querySelector('.item-card');
+            
+            // 데이터 속성 설정
+            card.setAttribute('data-id', item.id);
+            card.setAttribute('data-category', item.category || 'unknown');
+            card.setAttribute('data-subcategory', item.subcategory || 'unknown');
+            
+            // 이름 설정
+            card.querySelector('[data-name]').textContent = item.name;
+            
+            // 등급 배경색 설정
+            const gradeBg = card.querySelector('[data-grade-bg]');
+            gradeBg.classList.add(...(rarityColorMap[item.rarity]?.bg.split(' ') || []));
+            
+            // 등급 텍스트 설정
+            const gradeText = card.querySelector('[data-grade]');
+            gradeText.textContent = rarityNameMap[item.rarity] || '일반';
+            gradeText.classList.add(...(rarityColorMap[item.rarity]?.text.split(' ') || []));
+            
+            // 등급 배지 설정
+            const gradeBadge = card.querySelector('.grade-badge');
+            gradeBadge.textContent = rarityNameMap[item.rarity] || '일반';
+            gradeBadge.classList.add(...(rarityColorMap[item.rarity]?.text.split(' ') || []), 'bg-gray-100');
+            
+            // 가격 설정
+            const priceElement = card.querySelector('[data-price]');
+            priceElement.textContent = item.price.toLocaleString() + ' 골드';
+            
+            // 이미지 설정
+            const imgElement = card.querySelector('[data-img]');
+            imgElement.src = item.imageUrl || '/PNG/placeholder.png';
+            imgElement.alt = item.name;
+            
+            // 이미지 오류 처리
+            imgElement.onerror = function() {
+              this.src = '/PNG/placeholder.jpg';
+              this.onerror = null;
+            };
+            
+            // 컨테이너에 추가
+            itemContainer.appendChild(clone);
+          });
+          
+          // 상세정보 버튼 이벤트 추가
+          setTimeout(function() {
+            const detailButtons = document.querySelectorAll('.item-card button:nth-child(2)');
+            detailButtons.forEach(button => {
+              button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const card = this.closest('.item-card');
+                const itemId = card.getAttribute('data-id');
+                const item = allItems.find(i => i.id === itemId);
+                
+                if (item) {
+                  // 모달 열기
+                  const modal = document.getElementById('itemDetailModal');
+                  const modalContent = document.getElementById('modalContent');
+                  
+                  const rarityStyle = rarityColorMap[item.rarity]?.text || '';
+                  
+                  modalContent.innerHTML = `
+                    <div class="p-4 md:p-6">
+                      <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-bold ${rarityStyle}">${item.name}</h2>
+                      </div>
+                      <div class="flex flex-col md:flex-row md:space-x-4">
+                        <div class="mb-4 md:mb-0 w-full md:w-1/3">
+                          <div class="bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center h-40">
+                            <img src="${item.imageUrl}" alt="${item.name}" class="max-w-full max-h-full object-contain" onerror="this.src='/PNG/placeholder.jpg';">
+                          </div>
+                        </div>
+                        <div class="w-full md:w-2/3">
+                          <div class="mb-3">
+                            <p class="text-gray-700"><span class="font-semibold">등급:</span> <span class="${rarityStyle}">${rarityNameMap[item.rarity] || '일반'}</span></p>
+                            <p class="text-gray-700"><span class="font-semibold">가격:</span> ${item.price.toLocaleString()} 골드</p>
+                          </div>
+                          <div class="mb-4">
+                            <p class="text-gray-700"><span class="font-semibold">스탯:</span> ${item.stats || '-'}</p>
+                            ${item.effect ? `<p class="text-gray-700"><span class="font-semibold">효과:</span> ${item.effect}</p>` : ''}
+                          </div>
+                          <div class="mb-4">
+                            <p class="text-gray-600">${item.description}</p>
+                          </div>
+                          <button id="buyItemBtn" class="bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 w-full">
+                            ${item.price.toLocaleString()} 골드 구매하기
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  `;
+                  
+                  // 모달 표시
+                  modal.classList.remove('hidden');
+                  modal.classList.add('flex');
+                  
+                  // 닫기 버튼 이벤트
+                  const closeBtn = document.getElementById('closeModalButton');
+                  if (closeBtn) {
+                    closeBtn.onclick = function() {
+                      modal.classList.remove('flex');
+                      modal.classList.add('hidden');
+                    };
+                  }
+                }
+              });
+            });
+          }, 100);
+        }
+      }, 500); // 0.5초 후 실행
+    });
+  </script>
+  
+  <!-- 드롭다운 메뉴 초기화 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 드롭다운 메뉴 설정
+      const menuBtn = document.getElementById('menuBtn');
+      const dropdownMenu = document.querySelector('.dropdown-menu');
+      
+      // 메뉴 버튼 클릭 이벤트 - e.preventDefault()로 리다이렉트 방지
+      if (menuBtn) {
+        menuBtn.addEventListener('click', function(e) {
+          e.preventDefault(); // 리다이렉트 방지
+          e.stopPropagation(); // 이벤트 버블링 방지
+          dropdownMenu.classList.toggle('hidden');
+        });
+      } else {
+        console.error('메뉴 버튼을 찾을 수 없습니다.');
+      }
+      
+      // 메뉴 외부 클릭시 드롭다운 닫기
+      document.addEventListener('click', function(e) {
+        if (!dropdownMenu || dropdownMenu.classList.contains('hidden') || 
+            (menuBtn && menuBtn.contains(e.target))) {
+          return;
+        }
+        
+        if (!dropdownMenu.contains(e.target)) {
+          dropdownMenu.classList.add('hidden');
+        }
+      });
+      
+      // 로그인 상태에 따라 로그인/로그아웃 버튼 표시 조절
+      const logoutBtn = document.getElementById('logoutBtn');
+      const loginBtn = document.getElementById('loginBtn');
+      const isLoggedIn = localStorage.getItem('user') !== null;
+      
+      if (logoutBtn && loginBtn) {
+        if (isLoggedIn) {
+          logoutBtn.style.display = 'block';
+          loginBtn.style.display = 'none';
+        } else {
+          logoutBtn.style.display = 'none';
+          loginBtn.style.display = 'block';
+        }
+      }
+    });
+  </script>
+  
+  <style>
+    /* 토스트 애니메이션 */
+    @keyframes slideIn {
+      from { transform: translateY(-10%); }
+      to { transform: translateY(0); }
+    }
+  </style>
+</body>
+</html>

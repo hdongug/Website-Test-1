@@ -1,0 +1,59 @@
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* 가격 상승 애니메이션 */
+@keyframes priceUp {
+  0% { color: #10b981; transform: scale(1); }
+  50% { color: #10b981; transform: scale(1.1); }
+  100% { color: #10b981; transform: scale(1); }
+}
+
+/* 가격 하락 애니메이션 */
+@keyframes priceDown {
+  0% { color: #ef4444; transform: scale(1); }
+  50% { color: #ef4444; transform: scale(1.1); }
+  100% { color: #ef4444; transform: scale(1); }
+}
+
+/* 애니메이션 클래스 */
+.price-up {
+  animation: priceUp 1s ease;
+  font-weight: bold;
+}
+
+.price-down {
+  animation: priceDown 1s ease;
+  font-weight: bold;
+}
+
+/* 토스트 메시지 페이드 아웃 트랜지션 */
+#toast-message {
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* 아이템 카드 스타일 */
+.item-card {
+  transition: transform 0.3s ease;
+}
+
+.item-card:hover {
+  transform: translateY(-5px);
+}
+
+/* 등급 배지 스타일 */
+.grade-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* 등급별 색상 */
+.grade-normal { background-color: #e5e7eb; color: #374151; }
+.grade-rare { background-color: #d1fae5; color: #065f46; }
+.grade-epic { background-color: #dbeafe; color: #1e40af; }
+.grade-heroic { background-color: #ede9fe; color: #6d28d9; }
+.grade-legendary { background-color: #fee2e2; color: #b91c1c; }
+.grade-mythic { background-color: #ffedd5; color: #c2410c; }
