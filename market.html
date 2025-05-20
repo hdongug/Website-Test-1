@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>거래소 - 게임 거래소</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <!-- 공통 아이템 데이터 로드 (캐싱 방지) -->
-  <script src="/js/itemsData.js?v=1.6"></script>
+  <!-- 공통 아이템 데이터 로드 (캠싱 방지) -->
+  <script src="js/itemsData.js?v=1.7"></script>
+  <!-- 아이템 전용 스크립트 로드 -->
+  <script src="js/items.js?v=1.1"></script>
   
   <!-- 기본 아이템 데이터 정의 (데이터 로드 오류 대비) -->
   <script>
@@ -79,9 +81,9 @@
         <!-- 네비게이션 -->
         <nav class="relative">
           <div class="flex items-center space-x-4">
-            <a href="/" class="hover:text-purple-200">홈페이지</a>
-            <a href="/market.html" class="hover:text-purple-200 border-b-2 border-white">거래소</a>
-            <a href="/attendance.html" class="hover:text-purple-200">출석체크</a>
+            <a href="index.html" class="hover:text-purple-200">홈페이지</a>
+            <a href="market.html" class="hover:text-purple-200 border-b-2 border-white">거래소</a>
+            <a href="attendance.html" class="hover:text-purple-200">출석체크</a>
             
             <!-- 메뉴 드롭다운 -->
             <div class="relative">
@@ -92,15 +94,15 @@
               </button>
               <div class="dropdown-menu absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 hidden">
                 <div class="border-b border-gray-200 py-1">
-                  <a href="/profile.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">내 정보</a>
-                  <a href="/inventory.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">인벤토리</a>
+                  <a href="profile.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">내 정보</a>
+                  <a href="inventory.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">인벤토리</a>
                 </div>
                 <div class="border-b border-gray-200 py-1">
-                  <a href="/board.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">게시판</a>
+                  <a href="board.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">게시판</a>
                 </div>
                 <div class="pt-1">
                   <a href="#" id="logoutBtn" class="logged-in block px-4 py-2 text-gray-800 hover:bg-purple-100">로그아웃</a>
-                  <a href="/login.html" id="loginBtn" class="logged-out block px-4 py-2 text-gray-800 hover:bg-purple-100">로그인</a>
+                  <a href="login.html" id="loginBtn" class="logged-out block px-4 py-2 text-gray-800 hover:bg-purple-100">로그인</a>
                 </div>
               </div>
             </div>

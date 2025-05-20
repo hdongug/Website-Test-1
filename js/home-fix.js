@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
       
-      // 랜덤한 추천 아이템 4개 선택
-      const recommendedItems = getRandomItems(allItems, 4);
+      // 추천 아이템 선택 - 각 등급별로 1개씩 총 6개
+      const recommendedItems = getRecommendedItemsByRarity(allItems);
       
       // 추천 아이템 표시
       displayRecommendedItemsFixed(recommendedItems, recommendedItemsContainer);
@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', function() {
       // 시간 표시 업데이트
       updateTimeDisplayFixed();
       
-      // 30분 마다 아이템 갱신 타이머 설정
-      setupAutoRefresh();
+      // 24시간 마다 아이템 갱신 타이머 설정
+      setupAutoRefreshDaily();
       
     } catch (error) {
       console.error('홈 페이지 추천 아이템 표시 중 오류:', error);
@@ -204,14 +204,56 @@ document.addEventListener('DOMContentLoaded', function() {
   // uc2dcuac04 ud45cuc2dc uc5c5ub370uc774ud2b8
   function updateTimeDisplayFixed() {
     const now = new Date();
-    const nextTime = getNextHalfHourTime();
+    const nextTime = getNextDayTime();
     
-    // 다음 갱신 시간까지 남은 시간(분) 계산
-    const minutesUntilNextUpdate = Math.floor((nextTime - now) / (1000 * 60));
+    // 다음 갱신 시간까지 남은 시간 계산
+    const hoursUntilUpdate = Math.floor((nextTime - now) / (1000 * 60 * 60));
+    const minutesUntilUpdate = Math.floor(((nextTime - now) % (1000 * 60 * 60)) / (1000 * 60));
     
-    // uc5c5ub370uc774ud2b8 uc2dcuac04 ud45cuc2dc
-    const currentTimeElem = document.querySelector('.current-time');
-    const nextTimeElem = document.querySelector('.next-time');
+    try {
+      // 시간 표시 컨테이너 확인 및 생성
+      let timeDisplayContainer = document.getElementById('timeDisplay');
+      
+      // 시간 표시 컨테이너가 없으면 생성
+      if (!timeDisplayContainer) {
+        timeDisplayContainer = document.createElement('div');
+        timeDisplayContainer.id = 'timeDisplay';
+        timeDisplayContainer.className = 'flex justify-between bg-gray-100 p-2 rounded-md text-sm mb-4';
+        timeDisplayContainer.innerHTML = `
+          <div>현재 시간: <span class="current-time font-semibold"></span></div>
+          <div>다음 갱신: <span class="next-time font-semibold"></span> (매일 자정 갱신)</div>
+        `;
+        
+        // 추천 아이템 섹션 찾기 (여러 가지 클래스 및 ID 시도)
+        const recommendedItemsContainer = document.getElementById('recommendedItems') || 
+                                     document.querySelector('.recommended-items') || 
+                                     document.querySelector('.featured-items') || 
+                                     document.querySelector('.item-section');
+        
+        if (recommendedItemsContainer) {
+          recommendedItemsContainer.parentNode.insertBefore(timeDisplayContainer, recommendedItemsContainer);
+          console.log('시간 표시 요소 추가 성공');
+        } else {
+          // 컨테이너를 찾을 수 없는 경우 메인 콘텐츠 영역에 추가
+          const mainContent = document.querySelector('main') || document.body;
+          const firstChild = mainContent.firstChild;
+          mainContent.insertBefore(timeDisplayContainer, firstChild);
+          console.log('메인 콘텐츠에 시간 표시 요소 추가');
+        }
+      }
+    } catch (error) {
+      console.log('시간 표시 요소 생성 중 오류:', error);
+    }
+    
+    // 시간 표시 요소 얻기
+    let timeDisplayContainer = document.getElementById('timeDisplay');
+    if (!timeDisplayContainer) {
+      console.log('시간 표시 요소를 찾을 수 없어 탐색 중단');
+      return;
+    }
+    
+    const currentTimeElem = timeDisplayContainer.querySelector('.current-time');
+    const nextTimeElem = timeDisplayContainer.querySelector('.next-time');
     
     if (currentTimeElem) {
       currentTimeElem.textContent = formatKoreanTime(now);
@@ -248,7 +290,89 @@ document.addEventListener('DOMContentLoaded', function() {
     return `${hourText}${minuteText}`;
   }
   
-  // 자동 새로고침 설정
+  // 등급별 아이템 선택 함수 (신화, 전설, 영웅, 희소, 레어, 일반)
+  function getRecommendedItemsByRarity(items) {
+    if (!items || !Array.isArray(items) || items.length === 0) {
+      return [];
+    }
+    
+    // 등급 정의
+    const rarities = ['mythic', 'legendary', 'epic', 'rare', 'uncommon', 'common'];
+    const rarityNames = {
+      'mythic': '신화',
+      'legendary': '전설',
+      'epic': '영웅',
+      'rare': '희소',
+      'uncommon': '레어',
+      'common': '일반'
+    };
+    
+    // 결과 배열
+    const result = [];
+    
+    // 등급별로 필터링하여 각 등급에서 1개씩 선택
+    for (const rarity of rarities) {
+      // 해당 등급의 아이템만 필터링
+      const rarityItems = items.filter(item => item.rarity === rarity);
+      
+      if (rarityItems.length > 0) {
+        // 각 등급에서 랜덤하게 하나 선택
+        const randomIndex = Math.floor(Math.random() * rarityItems.length);
+        const selectedItem = rarityItems[randomIndex];
+        
+        // 디버그 정보 출력
+        console.log(`${rarityNames[rarity] || rarity} 등급 아이템 선택: ${selectedItem.name}`);
+        
+        // 결과 배열에 추가
+        result.push(selectedItem);
+      } else {
+        console.log(`${rarityNames[rarity] || rarity} 등급 아이템 없음`);
+      }
+    }
+    
+    // 아이템이 6개 미만이면 나머지는 일반 아이템으로 채우기
+    const remaining = 6 - result.length;
+    if (remaining > 0) {
+      // 일반 아이템이 부족한 경우, 다른 모든 아이템 중 랜덤 선택
+      const additionalItems = getRandomItems(items, remaining);
+      result.push(...additionalItems);
+      console.log(`추가 아이템 ${remaining}개 선택`);
+    }
+    
+    return result;
+  }
+
+  // 다음 날 0시 0분 계산
+  function getNextDayTime() {
+    const now = new Date();
+    const nextDay = new Date(now);
+    nextDay.setDate(now.getDate() + 1);
+    nextDay.setHours(0, 0, 0, 0);
+    
+    return nextDay;
+  }
+  
+  // 24시간 주기 자동 새로고침 설정
+  function setupAutoRefreshDaily() {
+    // 다음 날 0시까지 남은 시간
+    const nextTime = getNextDayTime();
+    const now = new Date();
+    const timeUntilNextUpdate = nextTime.getTime() - now.getTime();
+    
+    // 시간 표시 (시간, 분)
+    const hoursUntilUpdate = Math.floor(timeUntilNextUpdate / (1000 * 60 * 60));
+    const minutesUntilUpdate = Math.floor((timeUntilNextUpdate % (1000 * 60 * 60)) / (1000 * 60));
+    
+    console.log(`다음 갱신: ${hoursUntilUpdate}시간 ${minutesUntilUpdate}분 후 (매일 0시 갱신)`);
+    
+    // 다음 업데이트 타이머 설정
+    setTimeout(function() {
+      console.log('추천 아이템 일간 갱신');
+      window.location.reload();
+    }, timeUntilNextUpdate);
+  }
+
+  // 자동 새로고침 설정 (30분 주기) - 이전 함수, 하위 호환을 위해 유지
   function setupAutoRefresh() {
     // 다음 30분 단위 시간까지 남은 시간
     const nextTime = getNextHalfHourTime();

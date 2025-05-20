@@ -1,9 +1,10 @@
 import { createClient } from '@supabase/supabase-js';
 
 // Supabase 프로젝트 URL과 익명 키
-// 실제 프로젝트에서는 환경 변수를 사용하는 것이 좋습니다
-const supabaseUrl = 'https://your-supabase-url.supabase.co';
-const supabaseAnonKey = 'your-supabase-anon-key';
+const supabaseUrl = 'https://vtcryiawujwchkzfzhsq.supabase.co';
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ0Y3J5aWF3dWp3Y2hremZ6aHNxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTYyMDk1MDcsImV4cCI6MjAzMTc4NTUwN30.SCvnEiNvXAGKo5TF6TfTBOhuG2hFVR4WlxJGZWhoLUA';
+
+// 이 설정은 예시용으로, 실제 서비스에서는 환경 변수 또는 안전한 방법으로 관리해야 합니다.
 
 // Supabase 클라이언트 생성
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
@@ -28,14 +29,12 @@ export const removeUserFromLocalStorage = () => {
 
 // 회원가입
 export const signUpUser = async (username: string, password: string, nickname: string) => {
-  // 이메일 생성
-  const email = `${username}@example.com`;
-  
-  // Supabase Auth 회원가입
+  // Supabase Auth 회원가입 - 사용자명을 이메일 인증 없이 직접 사용
   const { data, error } = await supabase.auth.signUp({
-    email,
+    email: username, // Supabase에서는 email 필드가 필요하지만, 이를 사용자명으로 활용
     password,
     options: {
+      emailRedirectTo: undefined, // 이메일 검증 안함
       data: {
         username,
         nickname,
@@ -67,12 +66,9 @@ export const signUpUser = async (username: string, password: string, nickname: s
 
 // 로그인
 export const signInUser = async (username: string, password: string) => {
-  // 이메일 생성
-  const email = `${username}@example.com`;
-  
-  // Supabase Auth 로그인
+  // Supabase Auth 로그인 (사용자명을 이메일 필드에 사용)
   const { data, error } = await supabase.auth.signInWithPassword({
-    email,
+    email: username, // 사용자명을 이메일 대신 사용
     password
   });
 

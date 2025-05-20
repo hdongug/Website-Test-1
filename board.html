@@ -302,17 +302,18 @@
     <div class="container mx-auto px-4">
       <div class="flex flex-col md:flex-row justify-between items-center">
         <div class="mb-4 md:mb-0">
-          <h3 class="text-xl font-bold">게임 포탈</h3>
-          <p class="text-gray-400 text-sm mt-1">© 2025 All Rights Reserved</p>
+          <h3 class="text-xl font-bold mb-2">게임 아이템 거래소</h3>
+          <p class="text-gray-400">여러 중요한 아이템을 처리하는 위치</p>
+          <!-- 데이터베이스 상태 표시 -->
+          <div id="db-status" class="mt-2 flex items-center">
+            <span class="mr-2">데이터베이스 연결 상태:</span>
+            <span id="db-status-indicator" class="w-3 h-3 rounded-full bg-red-500 mr-1"></span>
+            <span id="db-status-text" class="text-red-400">연결 실패</span>
+          </div>
         </div>
-        <div class="flex space-x-4">
-          <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
-          <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
-          <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-discord"></i></a>
+        <div class="text-center md:text-right">
+          <p class="text-gray-400">&copy; 2025 게임 아이템 거래소. All rights reserved.</p>
         </div>
-      </div>
-      <div class="mt-4 text-center md:text-left text-gray-400 text-sm">
         <a href="#" class="hover:text-white mr-4">이용약관</a>
         <a href="#" class="hover:text-white mr-4">개인정보처리방침</a>
         <a href="#" class="hover:text-white">고객지원</a>
@@ -320,6 +321,10 @@
     </div>
   </footer>
 
+  <!-- 슈퍼베이스 라이브러리 및 데이터베이스 스크립트 -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./js/database.js?v=1.1"></script>
+  
   <!-- 자바스크립트 -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -551,6 +556,55 @@ ${post.content}
       }
       
       // 9. 초기화 실행 - 모든 게시판 데이터 로드
+      // 게시판 데이터 초기화
+      if (!window.boardPosts) {
+        window.boardPosts = {
+          free: [],
+          patch: [],
+          guild: []
+        };
+        saveBoardData();
+      }
+      
+      // 데이터베이스 상태 표시 초기화
+      const dbStatusIndicator = document.getElementById('db-status-indicator');
+      const dbStatusText = document.getElementById('db-status-text');
+      
+      // 데이터베이스 상태 이벤트 리스너
+      document.addEventListener('database-connected', function(e) {
+        if (e.detail.success) {
+          dbStatusIndicator.classList.remove('bg-red-500');
+          dbStatusIndicator.classList.add('bg-green-500');
+          dbStatusText.classList.remove('text-red-400');
+          dbStatusText.classList.add('text-green-400');
+          dbStatusText.textContent = '연결 성공';
+        } else {
+          dbStatusIndicator.classList.remove('bg-green-500');
+          dbStatusIndicator.classList.add('bg-red-500');
+          dbStatusText.classList.remove('text-green-400');
+          dbStatusText.classList.add('text-red-400');
+          dbStatusText.textContent = `연결 실패: ${e.detail.error || '알 수 없는 오류'}`;
+        }
+      });
+      
+      // 데이터베이스 상태 확인 함수
+      function checkDatabaseStatus() {
+        if (window.DB && typeof window.DB.isConnected === 'function') {
+          const isConnected = window.DB.isConnected();
+          if (isConnected) {
+            dbStatusIndicator.classList.remove('bg-red-500');
+            dbStatusIndicator.classList.add('bg-green-500');
+            dbStatusText.classList.remove('text-red-400');
+            dbStatusText.classList.add('text-green-400');
+            dbStatusText.textContent = '연결 성공';
+          }
+        }
+      }
+      
+      // 1초마다 데이터베이스 상태 확인
+      setInterval(checkDatabaseStatus, 1000);
+      
+      // 준비 완료 후 초기화 실행
       initTabs();
       renderBoardPosts('free');
       renderBoardPosts('patch');

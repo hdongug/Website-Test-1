@@ -34,25 +34,12 @@ const allItems = [
     imageUrl: '/PNG/weapon/KakaoTalk_20250510_205732390_02.jpg'
   },
   {
-    id: '13',
-    name: '심연의 칼',
-    price: 125000,
-    description: '공호한 심연속에 있는 이름 모를 어느 황제 의 검이다.',
-    stats: '공격력 +250 공격 속도 +75%',
-    effect: '평타를 5번 이상 때리면 광폭화로 방마저가 10%깍이는 대신 공격력 이 200%증가한다.',
-    effect2: '공격력이 750 이상일 경우 공격력을 추가적으로 500을 더 얻는다.',
-    rarity: 'legendary',
-    category: 'weapon',
-    subcategory: 'sword',
-    imageUrl: '/PNG/weapon/KakaoTalk_20250510_205732390_06.png'
-  },
-  {
     id: '4',
     name: '칠흑의 양날 도끼',
     price: 100000,
-    description: '옳 어느 제국 국가에서 장군이 쓰던 도끼이다.',
+    description: '옛 어느 제국 국가에서 장군이 쓰던 도끼이다.',
     stats: '공격력 +100 체력 + 450 스킬 감소 25%',
-    effect: '스킬 및 평타를 떨리면 방어력이 감소한다.(중첩횟수 5회, 최대 방어력 감소 25% 감소)',
+    effect: '스킬 및 평타를 떄리면 방어력이 감소한다.(중첩횟수 5회, 최대 방어력 감소 25% 감소)',
     rarity: 'epic',
     category: 'weapon',
     subcategory: 'axe',
@@ -81,7 +68,19 @@ const allItems = [
     subcategory: 'sword',
     imageUrl: '/PNG/weapon/KakaoTalk_20250510_205732390_07.jpg'
   },
-
+  {
+    id: '7',
+    name: '심연의 칼',
+    price: 125000,
+    description: '공허한 심연속에 있는 이름 모를 어느 황제 의 검이다.',
+    stats: '공격력 +250 공격 속도 +75%',
+    effect: '평타를 5번 이상 때리면 광폭화로 방마저가 10%깍이는 대신 공격력 이 200%증가한다.',
+    effect2: '공격력이 750 이상일 경우 공격력을 추가적으로 500을 더 얻는다.',
+    rarity: 'legendary',
+    category: 'weapon',
+    subcategory: 'sword',
+    imageUrl: '/PNG/weapon/KakaoTalk_20250510_205732390_06.png'
+  },
   {
     id: '8',
     name: '다르킨 단검',
@@ -154,7 +153,7 @@ const allItems = [
     rarity: 'common',
     category: 'potion',
     subcategory: 'healing',
-    imageUrl: '/PNG/KakaoTalk_20250510_213329962.png'
+    imageUrl: '/PNG/potion/KakaoTalk_20250510_213329962.png'
   }
 ];
 

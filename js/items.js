@@ -1,197 +1,103 @@
-// 아이템 데이터 정의
-const items = [
-  {
-    id: 1,
-    name: '빛과 어둠',
-    type: '쌍검',
-    category: '무기',
-    description: '빛과 어둠의 힘이 깃든 전설적인 쌍검. 어둠의 균형을 맞추어 사용하면 엄청난 위력을 발휘한다.',
-    basePrice: 1250000,
-    grade: '신화',
-    stats: {
-      '공격력': '+120',
-      '크리티컬': '+15%',
-      '공격속도': '+8%'
-    }
-  },
-  {
-    id: 2,
-    name: '엘프의 활',
-    type: '활',
-    category: '무기',
-    description: '엘프 장인이 만든 활. 가볍고 정확한 사격이 가능하다.',
-    basePrice: 450000,
-    grade: '영웅',
-    stats: {
-      '공격력': '+75',
-      '명중률': '+12%',
-      '사거리': '+15%'
-    }
-  },
-  {
-    id: 3,
-    name: '다르킨의 낫',
-    type: '낫',
-    category: '무기',
-    description: '다르킨 종족의 전통 무기. 넓은 범위의 공격이 가능하다.',
-    basePrice: 820000,
-    grade: '전설',
-    stats: {
-      '공격력': '+95',
-      '광역공격': '+25%',
-      '생명력 흡수': '+5%'
-    }
-  },
-  {
-    id: 4,
-    name: '암흑군주의 활',
-    type: '활',
-    category: '무기',
-    description: '암흑군주가 사용했던 활. 어둠의 힘을 담아 화살을 쏠 수 있다.',
-    basePrice: 1120000,
-    grade: '신화',
-    stats: {
-      '공격력': '+112',
-      '어둠 속성': '+30%',
-      '침투력': '+18%'
-    }
-  },
-  {
-    id: 5,
-    name: '다르킨의 검',
-    type: '단검',
-    category: '무기',
-    description: '다르킨 종족의 의식용 단검. 빠른 공격이 가능하다.',
-    basePrice: 750000,
-    grade: '전설',
-    stats: {
-      '공격력': '+85',
-      '공격속도': '+15%',
-      '회피율': '+10%'
-    }
-  },
-  {
-    id: 6,
-    name: '일본도',
-    type: '양손검',
-    category: '무기',
-    description: '동양의 기술로 만들어진, 균형 잡힌 검.',
-    basePrice: 120000,
-    grade: '레어',
-    stats: {
-      '공격력': '+48',
-      '정확도': '+8%',
-      '방어 관통': '+5%'
-    }
-  },
-  {
-    id: 7,
-    name: '산적 두목의 검',
-    type: '한손검',
-    category: '무기',
-    description: '산적 두목이 사용했던 검. 약탈의 행운이 깃들어 있다.',
-    basePrice: 85000,
-    grade: '희귀',
-    stats: {
-      '공격력': '+35',
-      '골드 획득': '+8%',
-      '치명타 확률': '+6%'
-    }
-  },
-  {
-    id: 8,
-    name: '녹서스의 떠돌이 도끼',
-    type: '도끼',
-    category: '무기',
-    description: '녹서스 영토를 떠돌며 쓰였던 평범한 도끼.',
-    basePrice: 25000,
-    grade: '일반',
-    stats: {
-      '공격력': '+20',
-      '방어구 파괴': '+5%',
-      '단단함': '+3%'
-    }
-  },
-  {
-    id: 9,
-    name: '신의 활',
-    type: '활',
-    category: '무기',
-    description: '신의 힘을 담은 활. 빛의 화살을 쏠 수 있다.',
-    basePrice: 1200000,
-    grade: '신화',
-    stats: {
-      '공격력': '+115',
-      '빛 속성': '+30%',
-      '치유력': '+10%'
-    }
-  },
-  {
-    id: 10,
-    name: '칠흑의 양날도끼',
-    type: '도끼',
-    category: '무기',
-    description: '칠흑 같은 어둠의 금속으로 만들어진 양날도끼. 강력한 파괴력을 가지고 있다.',
-    basePrice: 820000,
-    grade: '전설',
-    stats: {
-      '공격력': '+98',
-      '방어구 파괴': '+22%',
-      '어둠 속성': '+15%'
-    }
-  },
-  {
-    id: 11,
-    name: '빙결 활',
-    type: '활',
-    category: '무기',
-    description: '얼음의 힘이 깃든 활. 대상을 얼려버릴 수 있다.',
-    basePrice: 450000,
-    grade: '영웅',
-    stats: {
-      '공격력': '+78',
-      '얼음 속성': '+25%',
-      '슬로우 효과': '+15%'
-    }
-  },
-  {
-    id: 12,
-    name: '떠돌이 지팡이',
-    type: '지팡이',
-    category: '무기',
-    description: '떠돌이 마법사가 사용했던 평범한 지팡이.',
-    basePrice: 28000,
-    grade: '일반',
-    stats: {
-      '마법 공격력': '+25',
-      '마나 재생': '+5%',
-      '마법 속도': '+3%'
-    }
+// 아이템 데이터 정의 - itemsData.js의 데이터 사용
+let items = [];
+
+// itemsData.js의 allItems 사용
+// 이 코드는 window.allItems가 있을 경우 가져옴
+// 로드 순서에 따라 동작하도록 함수로 감싸고 DOMContentLoaded 이벤트에서 실행
+
+function loadItemsData() {
+  console.log('아이템 데이터 불러오기 시도');
+  
+  if (typeof window !== 'undefined' && window.allItems && Array.isArray(window.allItems)) {
+    console.log('외부 allItems 데이터 사용, 개수:', window.allItems.length);
+    
+    // allItems의 데이터 형식을 로컬 items 형식에 맞게 변환
+    items = window.allItems.map(item => {
+      // 이름 형식 변환
+      const formattedStats = {};
+      if (item.stats) {
+        // 문자열 형태의 stats를 객체 형태로 변환 시도
+        const statParts = item.stats.split(' ');
+        statParts.forEach(part => {
+          const match = part.match(/([^+:\s]+)\s*([+:]\s*\d+%?)/);
+          if (match) {
+            formattedStats[match[1]] = match[2];
+          }
+        });
+      }
+      
+      // 등급 이름 변환 (영문 -> 한글)
+      const gradeMap = {
+        'common': '일반',
+        'uncommon': '희귀',
+        'rare': '레어',
+        'epic': '영웅',
+        'legendary': '전설',
+        'mythic': '신화',
+        'unique': '고유'
+      };
+      
+      const grade = gradeMap[item.rarity] || item.rarity;
+      
+      // 카테고리 변환 (영문 -> 한글)
+      const categoryMap = {
+        'weapon': '무기',
+        'armor': '방어구',
+        'potion': '물약',
+        'accessory': '장신구'
+      };
+      
+      const category = categoryMap[item.category] || item.category;
+      
+      return {
+        id: parseInt(item.id) || Math.floor(Math.random() * 1000),
+        name: item.name,
+        type: item.subcategory || '',
+        category: category,
+        description: item.description || '',
+        basePrice: item.price || 0,
+        currentPrice: item.price || 0,
+        grade: grade,
+        stats: formattedStats,
+        effect: item.effect || '',
+        effect2: item.effect2 || '',
+        set: item.set || '',
+        imagePath: item.imageUrl || ''
+      };
+    });
+    
+    console.log('변환된 아이템 데이터:', items.length, '개');
+  } else {
+    console.warn('window.allItems 데이터가 없습니다. 공통 아이템 데이터 로드 오류');
   }
-];
+}
 
 // 이미지 파일명 매핑 (실제 이미지 경로 지정)
 const imageMap = {
-  1: '/PNG/weapon/KakaoTalk_20250510_205732390.jpg',     // 빛과 어둠(쌍검) - 신화
-  2: '/PNG/weapon/KakaoTalk_20250510_205732390_11.jpg', // 엘프의 활(활) - 영웅
-  3: '/PNG/weapon/KakaoTalk_20250510_205732390_10.jpg', // 다르킨의 낫(낫) - 전설
-  4: '/PNG/weapon/KakaoTalk_20250510_205732390_09.jpg', // 암흑군주의 활(활) - 신화
-  5: '/PNG/weapon/KakaoTalk_20250510_205732390_08.jpg', // 다르킨의 검(단검) - 전설
-  6: '/PNG/weapon/KakaoTalk_20250510_205732390_07.jpg', // 일본도(양손검) - 레어
-  7: '/PNG/weapon/KakaoTalk_20250510_205732390_06.png', // 산적 두목의 검(한손검) - 희귀
-  8: '/PNG/weapon/KakaoTalk_20250510_205732390_05.png', // 녹서스의 떠돌이 도끼(도끼) - 일반
-  9: '/PNG/weapon/KakaoTalk_20250510_205732390_04.jpg', // 신의 활(활) - 신화
-  10: '/PNG/weapon/KakaoTalk_20250510_205732390_03.jpg', // 칠흑의 양날도끼(도끼) - 전설
-  11: '/PNG/weapon/KakaoTalk_20250510_205732390_02.jpg', // 빙결 활(활) - 영웅
-  12: '/PNG/weapon/KakaoTalk_20250510_205732390_01.jpg'  // 떠돌이 지팡이(지팡이) - 일반
+  // 무기류
+  1: '/PNG/weapon/KakaoTalk_20250510_205732390_01.jpg',  // 마법 스태프 - 일반
+  2: '/PNG/weapon/KakaoTalk_20250510_205732390_05.png',  // 제국 도끼 - 일반
+  3: '/PNG/weapon/KakaoTalk_20250510_205732390_02.jpg',  // 제국의 활 - 일반
+  4: '/PNG/weapon/KakaoTalk_20250510_205732390_03.jpg',  // 칠흑의 양날 도끼 - 영웅
+  5: '/PNG/weapon/KakaoTalk_20250510_205732390_04.jpg',  // 천공의 활 - 영웅
+  6: '/PNG/weapon/KakaoTalk_20250510_205732390_07.jpg',  // 사무라이의 검 - 레어
+  7: '/PNG/weapon/KakaoTalk_20250510_205732390_06.png',  // 심연의 칼 - 전설
+  8: '/PNG/weapon/KakaoTalk_20250510_205732390_08.jpg',  // 다르킨 단검 - 신화
+  9: '/PNG/weapon/KakaoTalk_20250510_205732390_09.jpg',  // 아르테미스의 활 - 신화
+  // 방어구류
+  10: '/PNG/armor/KakaoTalk_20250510_205715529_01.png', // 갑옷 - 일반
+  11: '/PNG/armor/KakaoTalk_20250510_205715529_03.jpg', // 에테르 장갑 - 레어
+  12: '/PNG/armor/KakaoTalk_20250510_205715529.jpg',     // 에테르 후드 - 레어
+  // 물약류
+  100: '/PNG/potion/KakaoTalk_20250510_213329962.png'    // 체력회복 - 일반
 };
 
 // 각 카테고리에 대한 서브카테고리 정의
 const subcategories = {
-  '무기': ['쌍검', '활', '낫', '단검', '양손검', '한손검', '도끼', '지팡이'],
-  '방어구': ['투구', '갑옷', '모자', '장갑', '전신 방어구', '부적'],
-  '악세서리': ['반지', '귀걸이', '목걸이', '팔찌'],
-  '소비아이템': ['포션', '스크롤', '룬', '엘릭서']
+  '무기': ['검', '도끼', '활', '단검', '지팡이'],
+  '방어구': ['갑옷', '장갑', '모자'],
+  '물약': ['회복약', '버프'],
+  '장신구': ['반지', '목걸이', '팔찌']
 };
 
 // 아이템 초기화 함수
@@ -296,6 +202,13 @@ function updateSubcategories(categoryFilter) {
   subcategorySelect.disabled = false;
 }
 
+// 페이지 로드 시 실행
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('items.js DOM 로드 완료, 아이템 데이터 불러오기 시작');
+  loadItemsData();
+  initItems();
+});
+
 // 모듈로 내보내기
 export { 
   items, 
@@ -304,5 +217,6 @@ export {
   initItems, 
   getItemsForPage, 
   filterItems, 
-  updateSubcategories 
+  updateSubcategories,
+  loadItemsData
 };
